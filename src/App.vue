@@ -47,11 +47,13 @@ import { markRaw, defineComponent } from 'vue'
 import MyComponent from '@/components/MyComponent.vue'
 import SimpleButton from '@/components/SimpleButton.vue'
 import RandomQuote from '@/components/RandomQuote.vue'
+import UserFilter from '@/components/UserFilter.vue'
+import { demoUserList1 } from '@/data/users'
 
 type instanceDescription = {
   description: string,
   props: {
-    [ key: string ]: string
+    [ key: string ]: string | Array<object>
   },
   value?: any,
 }
@@ -119,6 +121,35 @@ export default defineComponent({
                 maxQuotes: 3,
               },
               value: [] as string[],
+            },
+          ] as instanceDescription[]
+        },
+        {
+          name: 'User filter',
+          description: 'Simple user filtering component',
+          component: markRaw(UserFilter),
+          tag: 'user-filter',
+          showValue: true,
+          instances: [
+            {
+              description: 'User filter with default props',
+              props: {
+                list: demoUserList1,
+              },
+              value: [],
+            },
+            {
+              description: 'User filter with different caption and pre-selected list',
+              props: {
+                caption: 'Select Users',
+                type: 'primary',
+                list: demoUserList1,
+              },
+              value: [
+                {
+                  id: 'u1'
+                },
+              ],
             },
           ] as instanceDescription[]
         },
